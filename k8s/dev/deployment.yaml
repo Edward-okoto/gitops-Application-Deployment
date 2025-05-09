@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vision-app-dev
+  namespace: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vision-app
+  template:
+    metadata:
+      labels:
+        app: vision-app
+    spec:
+      containers:
+        - name: vision-app
+          image: your-dev-image:latest
+          ports:
+            - containerPort: 8080
