@@ -325,6 +325,7 @@ git commit -m "Initial commit - GitOps structure"
 git remote add origin https://github.com/Edward-okoto/gitops-Application-Deployment.git
 git push origin main
 ```
+
 Now your repository is **ready for Argo CD**.
 
 ---
@@ -334,16 +335,19 @@ Add the repository to Argo CD:
 ```bash
 argocd repo add https://github.com/Edward-okoto/gitops-Application-Deployment.git
 ```
+![](./img/g7.png)
 
 Create the Argo CD application:
 ```bash
-argocd app create vision-app \
+argocd app create vision-app-dev \
   --repo https://github.com/Edward-okoto/gitops-Application-Deployment.git \
   --path k8s/dev \
   --dest-server https://kubernetes.default.svc \
   --dest-namespace dev \
   --sync-policy automated
 ```
+
+![](./img/g8.png)
 
 Repeat for `prod`:
 ```bash
@@ -354,6 +358,7 @@ argocd app create vision-app-prod \
   --dest-namespace prod \
   --sync-policy automated
 ```
+![](./img/g9.png)
 
 #### **Next Steps for GitOps Deployment in Argo CD**
 
