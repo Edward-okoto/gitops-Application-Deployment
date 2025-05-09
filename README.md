@@ -313,16 +313,13 @@ spec:
           ports:
             - containerPort: 8080
 ```
-
 ---
 
 #### **3️⃣ Initialize Git Repository & Commit Changes**
 Run:
 ```bash
-git init
 git add .
 git commit -m "Initial commit - GitOps structure"
-git remote add origin https://github.com/Edward-okoto/gitops-Application-Deployment.git
 git push origin main
 ```
 
@@ -338,6 +335,7 @@ argocd repo add https://github.com/Edward-okoto/gitops-Application-Deployment.gi
 ![](./img/g7.png)
 
 Create the Argo CD application:
+
 ```bash
 argocd app create vision-app-dev \
   --repo https://github.com/Edward-okoto/gitops-Application-Deployment.git \
@@ -381,29 +379,6 @@ If missing, add it:
 ```bash
 argocd repo add https://github.com/Edward-okoto/gitops-Application-Deployment.git
 ```
-
----
-
-##### **3️⃣ Create Argo CD Applications for Dev & Prod**
-Run:
-```bash
-argocd app create vision-app-dev \
-  --repo https://github.com/Edward-okoto/gitops-Application-Deployment.git \
-  --path k8s/dev \
-  --dest-server https://kubernetes.default.svc \
-  --dest-namespace dev \
-  --sync-policy automated
-```
-And for `prod`:
-```bash
-argocd app create vision-app-prod \
-  --repo https://github.com/Edward-okoto/gitops-Application-Deployment.git \
-  --path k8s/prod \
-  --dest-server https://kubernetes.default.svc \
-  --dest-namespace prod \
-  --sync-policy automated
-```
-
 ---
 
 ##### **4️⃣ Sync Applications**
@@ -412,7 +387,8 @@ Trigger sync:
 argocd app sync vision-app-dev
 argocd app sync vision-app-prod
 ```
-
+![](./img/g10.png)
+![](./img/g11.png)
 ---
 
 ##### **5️⃣ Verify Deployment**
@@ -424,13 +400,6 @@ kubectl get deployments -n dev
 kubectl get deployments -n prod
 ```
 
----
 
-##### **Wrapping Up**
-✅ Push repository changes to GitHub  
-✅ Register Git repo in Argo CD  
-✅ Create **dev** and **prod** applications  
-✅ Sync both applications  
-✅ Verify Kubernetes deployment  
 
 
